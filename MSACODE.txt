@@ -1,0 +1,51 @@
+import pandas as pd
+data=pd.read_csv('mcdonalds.csv')
+print(data)
+data.head()
+import numpy as np 
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+#data visualization
+import matplotlib.pyplot as plt
+
+
+#clustering model library
+from sklearn.cluster import KMeans
+from scipy.cluster.hierarchy import linkage, dendrogram
+from sklearn.cluster import AgglomerativeClustering
+
+import os
+data.describe()
+data.corr()
+plt.figure(figsize=(20,7))
+Gender = ['Male', 'Female']
+for i in Gender:
+    plt.scatter(x='age',y='VisitFrequency', data=data[data['Gender']==i],s = 200 , alpha = 0.5 , label = i)
+plt.legend()
+plt.xlabel("age")
+plt.ylabel("VisitFrequncy")
+plt.title("visit frequency depening on age")
+plt.show()
+
+#age barchart
+plt.figure(figsize=(20,10))
+sns.countplot(data.Age)
+plt.xlabel("Age")
+plt.ylabel("Person Count")
+plt.show()
+
+#piechart for taste of mcd
+labels = ['No','Yes']
+sizes = [data.query('tasty == "Yes"').tasty.count(),data.query('tasty' == "no").tasty.count()]
+
+colors = ['#ffdaB9','#66b3ff']
+#explsion
+explode = (0.05,0.05)
+plt.figure(figsize=(8,8)) 
+my_circle=plt.Circle( (0,0), 0.7, color='white')
+plt.pie(sizes, colors = colors, labels=labels, autopct='%1.1f%%', startangle=90, pctdistance=0.85,explode=explode)
+p=plt.gcf()
+plt.axis('equal')
+p.gca().add_artist(my_circle)
+plt.show()
